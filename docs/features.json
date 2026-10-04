@@ -2,7 +2,7 @@
   "features": [
     {
       "added": "2026-10-04",
-      "completed": null,
+      "completed": "2026-10-04",
       "description": "Thin Makefile wrapper over cargo (setup, test, style, build, clean), lib.rs re-exports, module skeletons, README shield badges, .gitignore check. Everything else builds on this.",
       "design_doc": null,
       "id": "F001",
@@ -10,28 +10,28 @@
       "name": "Project scaffolding",
       "notes": "",
       "priority": "high",
-      "status": "planned",
+      "status": "completed",
       "subtasks": [
         {
           "id": "F001-1",
           "name": "Makefile with setup/test/style/build/clean + help",
-          "status": "planned"
+          "status": "completed"
         },
         {
           "id": "F001-2",
           "name": "lib.rs re-exports + module skeletons",
-          "status": "planned"
+          "status": "completed"
         },
         {
           "id": "F001-3",
           "name": "README badges + .gitignore check",
-          "status": "planned"
+          "status": "completed"
         }
       ],
       "tests": {
         "files": [],
         "notes": "style target passes; cargo build succeeds",
-        "status": "missing"
+        "status": "passing"
       }
     },
     {
@@ -287,12 +287,12 @@
   "last_updated": "2026-10-04",
   "project": "hnsw-rust",
   "summary": {
-    "completed": 0,
+    "completed": 1,
     "in_progress": 0,
-    "planned": 9,
+    "planned": 8,
     "tests_failing": 0,
-    "tests_missing": 9,
-    "tests_passing": 0,
+    "tests_missing": 8,
+    "tests_passing": 1,
     "total": 9
   }
 }
