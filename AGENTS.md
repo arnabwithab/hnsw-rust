@@ -154,6 +154,7 @@ Subagents in `~/.config/opencode/agents/`.
 ## Project-Specific Notes
 - HNSW params: `M` (max neighbors), `ef_construction`, `ef_search`, `mL` level multiplier — keep in one `HnswConfig` struct.
 - Level sampling uses exponential decay (`-ln(uniform) * mL`); RNG must be seedable for deterministic tests.
-- Distance default: Euclidean (L2); cosine as second metric. Trait-gated so new metrics are one fn.
+- Distance default: Cosine; Euclidean kept for SIFT-style benchmarks. Trait-gated so new metrics are one fn.
 - Correctness bar: brute-force recall check in `tests/` — HNSW results must match exact k-NN within tolerance on small fixtures.
+- Benchmark target: `ann-benchmarks` million-scale. Headline: SIFT-1M 128d Euclidean, recall@10 vs QPS. Secondary: GloVe-100 cosine/angular (covers cosine-default path). Competitors: `hnswlib`, `faiss`, `usearch`. Report build time + index size alongside recall/QPS, with machine specs.
 - Never touch: `Cargo.lock` by hand (cargo owns it), `target/` (gitignored).

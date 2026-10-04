@@ -1,0 +1,298 @@
+{
+  "features": [
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Thin Makefile wrapper over cargo (setup, test, style, build, clean), lib.rs re-exports, module skeletons, README shield badges, .gitignore check. Everything else builds on this.",
+      "design_doc": null,
+      "id": "F001",
+      "module": "Makefile, src/lib.rs",
+      "name": "Project scaffolding",
+      "notes": "",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F001-1",
+          "name": "Makefile with setup/test/style/build/clean + help",
+          "status": "planned"
+        },
+        {
+          "id": "F001-2",
+          "name": "lib.rs re-exports + module skeletons",
+          "status": "planned"
+        },
+        {
+          "id": "F001-3",
+          "name": "README badges + .gitignore check",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "style target passes; cargo build succeeds",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Trait-gated distance metrics so new metrics are one impl. Cosine is the default (embedding workloads); Euclidean kept for SIFT-style benchmarks and general spatial data.",
+      "design_doc": null,
+      "id": "F002",
+      "module": "src/distance.rs",
+      "name": "Distance metrics (trait + cosine + euclidean)",
+      "notes": "Paper is metric-agnostic; default is Cosine per owner preference.",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F002-1",
+          "name": "Distance trait",
+          "status": "planned"
+        },
+        {
+          "id": "F002-2",
+          "name": "Cosine impl (default)",
+          "status": "planned"
+        },
+        {
+          "id": "F002-3",
+          "name": "Euclidean impl",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Unit tests: zero-vector guard, known-value pairs, symmetry",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Layered graph storage: per-level neighbor lists with fixed max degree (M / Mmax). No search logic, just storage + bidirectional link helpers.",
+      "design_doc": null,
+      "id": "F003",
+      "module": "src/graph.rs",
+      "name": "Layered graph storage",
+      "notes": "",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F003-1",
+          "name": "Node + per-level neighbor lists",
+          "status": "planned"
+        },
+        {
+          "id": "F003-2",
+          "name": "Bidirectional link + prune to Mmax",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Unit tests: add node, link symmetry, degree cap enforced",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Single HnswConfig struct (M, ef_construction, ef_search, mL) plus exponential-decay level sampling with seedable RNG for deterministic tests.",
+      "design_doc": null,
+      "id": "F004",
+      "module": "src/hnsw.rs",
+      "name": "Config + level sampling",
+      "notes": "",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F004-1",
+          "name": "HnswConfig with validated defaults",
+          "status": "planned"
+        },
+        {
+          "id": "F004-2",
+          "name": "Seedable RNG + random_level()",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Unit tests: seeded RNG deterministic, level distribution decays",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Insert path: greedy descent to target layer, ef_construction beam search per layer, neighbor selection + bidirectional connect with pruning. Depends on F003/F004.",
+      "design_doc": null,
+      "id": "F005",
+      "module": "src/hnsw.rs",
+      "name": "Insert",
+      "notes": "",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F005-1",
+          "name": "Greedy descent to insert layer",
+          "status": "planned"
+        },
+        {
+          "id": "F005-2",
+          "name": "Per-layer candidate search (ef_construction)",
+          "status": "planned"
+        },
+        {
+          "id": "F005-3",
+          "name": "Neighbor select + connect + prune",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Unit tests: single insert, degree caps hold after N inserts",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "k-NN search: greedy descent from top layer to layer 1, ef_search beam search at layer 0, return top-k. Depends on F005 (needs a built index).",
+      "design_doc": null,
+      "id": "F006",
+      "module": "src/hnsw.rs",
+      "name": "Search",
+      "notes": "",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F006-1",
+          "name": "Greedy descent to layer 0",
+          "status": "planned"
+        },
+        {
+          "id": "F006-2",
+          "name": "Beam search with ef_search at layer 0",
+          "status": "planned"
+        },
+        {
+          "id": "F006-3",
+          "name": "Top-k ranking",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Unit tests: exact match on tiny fixture, k > n handling",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Demo binary (build index, query, print recall) plus end-to-end brute-force recall check: HNSW results must match exact k-NN within tolerance on small fixtures.",
+      "design_doc": null,
+      "id": "F007",
+      "module": "src/main.rs, tests/integration_test.rs",
+      "name": "Demo binary + recall test",
+      "notes": "Correctness bar per AGENTS.md; precursor to ann-benchmarks (SIFT-1M euclidean, GloVe cosine).",
+      "priority": "high",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F007-1",
+          "name": "Demo binary plumbing only",
+          "status": "planned"
+        },
+        {
+          "id": "F007-2",
+          "name": "Brute-force recall integration test",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [
+          "tests/integration_test.rs"
+        ],
+        "notes": "recall@k within tolerance vs brute force",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Save/load a built index to disk. Explicitly deferred until insert+search+recall (F005-F007) are done.",
+      "design_doc": null,
+      "id": "F008",
+      "module": "src/hnsw.rs",
+      "name": "Persistence (save/load)",
+      "notes": "Deferred v1-later per owner decision.",
+      "priority": "low",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F008-1",
+          "name": "Serialize index + config",
+          "status": "planned"
+        },
+        {
+          "id": "F008-2",
+          "name": "Load + search equivalence",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Round-trip test: search results identical after reload",
+        "status": "missing"
+      }
+    },
+    {
+      "added": "2026-10-04",
+      "completed": null,
+      "description": "Remove a vector and repair affected neighbor lists. Explicitly deferred; HNSW deletion needs neighborhood repair, do it after core is solid.",
+      "design_doc": null,
+      "id": "F009",
+      "module": "src/hnsw.rs, src/graph.rs",
+      "name": "Delete vector",
+      "notes": "Deferred v1-later per owner decision.",
+      "priority": "low",
+      "status": "planned",
+      "subtasks": [
+        {
+          "id": "F009-1",
+          "name": "Tombstone or unlink + repair",
+          "status": "planned"
+        },
+        {
+          "id": "F009-2",
+          "name": "Search correctness after delete",
+          "status": "planned"
+        }
+      ],
+      "tests": {
+        "files": [],
+        "notes": "Delete then recall check still passes",
+        "status": "missing"
+      }
+    }
+  ],
+  "last_updated": "2026-10-04",
+  "project": "hnsw-rust",
+  "summary": {
+    "completed": 0,
+    "in_progress": 0,
+    "planned": 9,
+    "tests_failing": 0,
+    "tests_missing": 9,
+    "tests_passing": 0,
+    "total": 9
+  }
+}
